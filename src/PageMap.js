@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useMemo, useCallback }  from 'react';
-import { FormControl, Select, MenuItem, Card, CardContent } from "@material-ui/core";
+import { FormControl, Select, MenuItem } from "@material-ui/core";
 import Infobox from "./Infobox";
 import { MapContainer, TileLayer } from "react-leaflet";
-import Map from "./Map";
+// import Map from "./Map";
 import "./Map.css";
 import "leaflet/dist/leaflet.css";
-import { showDataOnMap, prettyPrintCases, prettyPrintTotal } from "./util";
+import { showDataOnMap } from "./util";
 
 function PageMap({ casesType, setCasesType }) {
     const [countries, setCountries] = useState([]);
@@ -16,7 +16,7 @@ function PageMap({ casesType, setCasesType }) {
     const mapDefaultLat = 22.3737889;
     const mapDefaultLong = 114.142338;
     const mapDefaultZoom = 11;
-    let mapCenter = useMemo(() => [ mapDefaultLat, mapDefaultLong ]);
+    let mapCenter = [ mapDefaultLat, mapDefaultLong ];
     let mapZoom = mapDefaultZoom;
 
     useEffect(() => {
@@ -120,13 +120,15 @@ function PageMap({ casesType, setCasesType }) {
             <div className="pageMap__right">
                 <div className="pageMap__topBar">
                     {/* Individual & Area risk score */}
-                    <div>
-                        <h3>Individual Risk Score</h3>
-                        <h4>75</h4>
-                    </div>
-                    <div>
-                        <h3>Area Risk Score</h3>
-                        <h4>53</h4>
+                    <div className="pageMap__topBar__riskScores">
+                        <div>
+                            <h3>Individual Risk Score</h3>
+                            <h4>75</h4>
+                        </div>
+                        <div>
+                            <h3>Area Risk Score</h3>
+                            <h4>53</h4>
+                        </div>
                     </div>
                     {/* Dropdown */}
                     <FormControl className="pageMap__dropdown">

@@ -43,6 +43,12 @@ body {
   justify-content: space-between;
 }
 
+.pageMap__topBar__riskScores {
+  display: flex;
+  flex: 0.6;
+  justify-content: space-between;
+}
+
 .pageMap__dropdown {
   background-color: white;
 }
@@ -53,11 +59,11 @@ body {
 }
 
 .pageHistory__left {
-  flex: 0.6;
+  flex-direction: column;
 }
 
 .graph {
-  padding: 20px;
+  padding-top: 20px;
 }
 
 @media (max-width: 990px) {
@@ -76,5 +82,19 @@ body {
 
   .pageHistory__left {
     margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .pageMap__topBar {
+    flex-direction: column;
+  }
+
+  .pageMap__topBar__riskScores {
+    margin-bottom: 20px;
+  }
+
+  .pageMap__topBar__riskScores h3, h4 {
+    font-size: 85%;
   }
 }

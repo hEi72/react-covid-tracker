@@ -5,12 +5,12 @@
 
 .infobox__cases {
     font-weight: 600;
-    font-size: 1.75rem;
+    font-size: 1.6rem;
     margin-bottom: 0.5rem;
 }
 
 .infobox--selected {
-    border-top: 10px solid;
+    border-bottom: 10px solid;
 }
 
 .cases .infobox__cases {
@@ -39,4 +39,21 @@
     font-weight: 700 !important;
     font-size: 0.8rem !important;
     margin-top: 15px !important;
+}
+
+@media (max-width: 425px) {
+    .infobox__content {
+        vertical-align: middle;
+        align-items: center;
+        text-align: center;
+        padding: 16px 0 !important;
+    }
+
+    .infobox__title {
+        font-size: 0.9rem !important;
+    }
+
+    .infobox__cases {
+        font-size: 1.1rem;
+    }
 }

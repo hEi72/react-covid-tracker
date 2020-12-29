@@ -84,7 +84,7 @@ function LineGraph({ casesType, className }) {
                             borderColor: "#CC1034"
                         }]
                     }}
-                    width={visualViewport.width*0.7}
+                    width={visualViewport.width*0.65}
                     height={400}
                     options={options}
                 />

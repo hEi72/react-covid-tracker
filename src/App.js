@@ -64,7 +64,7 @@ function App() {
     <div className="app">
       {/* Header */}
       <div className="app__header">
-        <h1 className="title">COVID Tracker</h1>
+        <h1 className="title">COVID Tracker 🦠</h1>
 
         <AppBar position="static" color="default">
           <Tabs selectionFollowsFocus

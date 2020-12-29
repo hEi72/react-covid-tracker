@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Infobox.css";
 import { Card, CardContent, Typography } from '@material-ui/core';
-import { showDataOnMap, prettyPrintCases, prettyPrintTotal } from "./util";
+import { prettyPrintCases, prettyPrintTotal } from "./util";
 
 function Infobox({ title, value, active, cases, total, ...props }) {
     cases = prettyPrintCases(cases);
@@ -17,7 +17,7 @@ function Infobox({ title, value, active, cases, total, ...props }) {
                 <h2 className='infobox__cases'>{cases}</h2>
 
                 <Typography className='infobox__total' color='textSecondary'>
-                    Total: {total}
+                    Total<br />{total}
                 </Typography>
             </CardContent>
         </Card>
