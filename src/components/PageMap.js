@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useMemo, useCallback }  from 'react';
+import React, { useState, useEffect, useMemo }  from 'react';
 import { FormControl, Select, MenuItem } from "@material-ui/core";
-import L, { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import L from "leaflet";
+import "leaflet.heat";
 import db from '../firebase';
 // import Map from "./Map";
 
@@ -19,16 +21,19 @@ function PageMap({ casesType, setCasesType }) {
     const [mapDistricts, setMapDistricts] = useState([]);
     const [hidden, setHidden] = useState(false);
 
+    const [heatmap, setHeatmap] = useState([
+        [50.5, 30.5, 0.2], // lat, lng, intensity
+        [50.6, 30.4, 0.5]
+    ]);
+
     const mapDefaultLat = 22.3737889;
     const mapDefaultLong = 114.142338;
     const mapDefaultZoom = 11;
     let mapCenter = [ mapDefaultLat, mapDefaultLong ];
     let mapZoom = mapDefaultZoom;
 
-    const mapRef = useMap();
     // effects that only run once when page loads
     useEffect(() => {
-
         // // Compute the GeoHash for a lat/lng point
         // const lat = 51.5074;
         // const lng = 0.1278;
@@ -44,11 +49,6 @@ function PageMap({ casesType, setCasesType }) {
         // }).then(() => {
         //     // ...
         // });
-        var heat = mapRef.heatLayer([
-            [50.5, 30.5, 0.2], // lat, lng, intensity[50.6, 30.4, 0.5]
-        ], {radius: 25}).addTo(map);
-
-
 
         db.collection("districts").orderBy("name").get().then((snapshot) => {
             const docs = snapshot.docs;
@@ -123,6 +123,9 @@ function PageMap({ casesType, setCasesType }) {
         ),
         [mapCenter, mapZoom, mapDistricts, casesType],
     );
+
+
+    L.heatLayer(heatmap).addTo(map);
 
     return (
         <div className="pageMap">
