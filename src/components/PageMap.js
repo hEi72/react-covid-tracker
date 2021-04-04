@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo }  from 'react';
 import { FormControl, Select, MenuItem } from "@material-ui/core";
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import "leaflet.heat";
 import db from '../firebase';
@@ -15,12 +15,12 @@ const geofire = require('geofire-common');
 // import { showDataOnMap } from "../util";
 
 function PageMap({ casesType, setCasesType }) {
+    const [map, setMap] = useState(null);
     const [districts, setDistricts] = useState([]);
     const [district, setDistrict] = useState("district");
     const [districtInfo, setDistrictInfo] = useState({});
     const [mapDistricts, setMapDistricts] = useState([]);
     const [hidden, setHidden] = useState(false);
-
     const [heatmap, setHeatmap] = useState([
         [50.5, 30.5, 0.2], // lat, lng, intensity
         [50.6, 30.4, 0.5]
@@ -78,6 +78,12 @@ function PageMap({ casesType, setCasesType }) {
         }
     }, [casesType]);
 
+    useEffect(() => {
+        if (!!map) {
+            L.heatLayer(heatmap).addTo(map);
+        }
+    }, [map]);
+
     const onDistrictChange = async (e) => {
         const districtCode = e.target.value;
         if (districtCode === "district") {
@@ -106,9 +112,6 @@ function PageMap({ casesType, setCasesType }) {
         };
     };
 
-    //! Map
-    const [map, setMap] = useState(null);
-
     const displayMap = useMemo(
     // const displayMap = useEffect(
         () => (
@@ -123,9 +126,6 @@ function PageMap({ casesType, setCasesType }) {
         ),
         [mapCenter, mapZoom, mapDistricts, casesType],
     );
-
-
-    L.heatLayer(heatmap).addTo(map);
 
     return (
         <div className="pageMap">
